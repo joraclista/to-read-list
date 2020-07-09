@@ -1,6 +1,11 @@
 
 let BOOKS_LIST_CONTAINER;
 
+let addBookTitle;
+let addBookAuthor;
+let addBookDateFinished;
+let addBookBtn;
+
 const bookRowTeplate = function(book) {
     return `<div class="row">
         <!-- Switch -->
@@ -39,9 +44,37 @@ function onBookRowClick(e) {
 
 }
 
+function onAddBookClick() {
+
+    let newBook = {
+        title : addBookTitle.value,
+        author : addBookAuthor.value,
+        dateFinished : addBookDateFinished.value,
+        finished : false
+    };
+
+    console.log("onAddBookClick: newBook", newBook);
+
+    let row = document.createElement('div');
+    row.innerHTML = bookRowTeplate(newBook);
+
+    BOOKS_LIST_CONTAINER.insertBefore(row, BOOKS_LIST_CONTAINER.children[0]);
+
+    addBookTitle.value = '';
+    addBookAuthor.value = '';
+    addBookDateFinished.value = '';
+    //TODO add to model
+}
+
 function load() {
     BOOKS_LIST_CONTAINER =  document.getElementById("booksList");
+    addBookTitle = document.getElementById("addBookTitle");
+    addBookAuthor = document.getElementById("addBookAuthor");
+    addBookDateFinished = document.getElementById("addBookDateFinished");
+    addBookBtn = document.getElementById("addBook");
+
     BOOKS_LIST_CONTAINER.addEventListener("click", onBookRowClick);
+    document.getElementById("addBook").addEventListener("click", onAddBookClick);
 
     document.addEventListener('DOMContentLoaded', function() {
         var elems = document.querySelectorAll('.datepicker');
