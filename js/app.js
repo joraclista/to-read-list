@@ -19,7 +19,7 @@ const bookRowTeplate = function(book) {
         </div>
         <div class="col s5">${format(book.title)}</div>
         <div class="col s3">${format(book.author)}</div>  
-        <div class="col s3">${format(book.dateFinished)}</div>
+        <div class="col s3">${dateFormat(book.dateFinished)}</div>
     </div>`;
 };
 
@@ -33,7 +33,9 @@ init();
 function format(value) {
     return typeof value == 'undefined' || value == null ? '' : value;
 }
-
+function dateFormat(value) {
+    return typeof value == 'undefined' || value == null ? '' : new Date(Date.parse(value)).toLocaleDateString("ru");
+}
 function init() {
     document.addEventListener("DOMContentLoaded", load());
 }
@@ -45,7 +47,7 @@ function onBookRowClick(e) {
     if (el.classList.contains("switcher")) {
         let row = el.parentElement.parentElement.parentElement;
         console.log('k', row.children[3])
-        row.children[3].innerHTML = new Date().toLocaleDateString();
+        row.children[3].innerHTML = new Date().toLocaleDateString("ru");
         finishedBooksListContainer.insertBefore(row, finishedBooksListContainer.children[0]);
         //TODO update model
     }

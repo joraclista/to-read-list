@@ -10,7 +10,7 @@
         "description": "JavaScript lies at the heart of almost every modern web application, from social apps to the newest browser-based games. Though simple for beginners to pick up and play with, JavaScript is a flexible, complex language that you can use to build full-scale applications.",
         "website": "http://eloquentjavascript.net/",
         "finished" : true,
-        "dateFinished" : "2020-06-10"
+        "dateFinished" : "2020-05-19T07:22Z"
     },
     {
         "isbn": "9781449331818",
@@ -34,7 +34,7 @@
         "description": "Like it or not, JavaScript is everywhere these days-from browser to server to mobile-and now you, too, need to learn the language or dive deeper than you have. This concise book guides you into and through JavaScript, written by a veteran programmer who once found himself in the same position.",
         "website": "http://speakingjs.com/",
         "finished" : true,
-        "dateFinished" : "2020-06-10"
+        "dateFinished" : "2020-03-19T07:22Z"
     },
     {
         "isbn": "9781491950296",
