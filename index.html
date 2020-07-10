@@ -13,23 +13,26 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body class="teal  darken-3">
+<body class="grey lighten-1">
 
 <div class="container">
     <h1 class="white-text">Books List</h1>
 
-    <div  class="card teal  darken-2">
-        <div  class="card-content white-text">
+    <div  class="card white">
+        <div  class="card-content">
             <div class="row">
-                <div class="col s7 input-field">
+                <p id="validationMessage" class="red-text validation-message col s12"></p>
+            </div>
+            <div class="row">
+                <div class="col s6 input-field">
                     <input id="addBookTitle" class="validate">
-                    <label for="addBookTitle">Title</label>
+                    <label for="addBookTitle">Title*</label>
                 </div>
                 <div class="col s3 input-field">
                     <input id="addBookAuthor" class="validate">
-                    <label for="addBookAuthor">Author</label>
+                    <label for="addBookAuthor">Author*</label>
                 </div>
-                <div class="col s2 input-field ">
+                <div class="col s3 input-field ">
                     <input id="addBookDateFinished" class="datepicker" type="text">
                     <label for="addBookDateFinished">Date Finished</label>
                 </div>
@@ -44,17 +47,17 @@
     </div>
 
 
-    <div id="books" class="card teal  darken-2">
-        <div id="game" class="card-content white-text">
+    <div id="books" class="card white ">
+        <div id="game" class="card-content">
             <div class="row title">
                 <div class="col s1"></div>
-                <div class="col s1">##</div>
                 <div class="col s5">Title</div>
                 <div class="col s3">Author</div>
-                <div class="col s2">Date Finished Reading</div>
+                <div class="col s3">Date Finished</div>
             </div>
 
-            <div id="booksList"></div>
+            <div id="booksList" class="border-top"></div>
+            <div id="finishedBooksList" class="border-top"></div>
         </div>
 
     </div>

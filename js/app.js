@@ -1,10 +1,12 @@
 
-let BOOKS_LIST_CONTAINER;
+let booksListContainer;
+let finishedBooksListContainer;
 
 let addBookTitle;
 let addBookAuthor;
 let addBookDateFinished;
 let addBookBtn;
+let validationMessage;
 
 const bookRowTeplate = function(book) {
     return `<div class="row">
@@ -15,11 +17,15 @@ const bookRowTeplate = function(book) {
                 <span></span>
              </label>
         </div>
-        <div class="col s1">${format(book.num)}</div>
         <div class="col s5">${format(book.title)}</div>
         <div class="col s3">${format(book.author)}</div>  
-        <div class="col s2">${format(book.dateFinished)}</div>
+        <div class="col s3">${format(book.dateFinished)}</div>
     </div>`;
+};
+
+const VALIDATION_MESSAGES = {
+    invalidTitle : "Title should be not empty and at least 3 letters long",
+    invalidAuthor : "Author should be not empty and at least 3 letters long"
 };
 
 init();
@@ -37,8 +43,10 @@ function onBookRowClick(e) {
     console.log(`onBookRowClick: e.target `, e.target);
     let el =  e.target;
     if (el.classList.contains("switcher")) {
-        console.log('k', el.parentElement.parentElement.parentElement.children[4])
-        el.parentElement.parentElement.parentElement.children[4].innerHTML = new Date().toLocaleDateString();
+        let row = el.parentElement.parentElement.parentElement;
+        console.log('k', row.children[3])
+        row.children[3].innerHTML = new Date().toLocaleDateString();
+        finishedBooksListContainer.insertBefore(row, finishedBooksListContainer.children[0]);
         //TODO update model
     }
 
@@ -55,25 +63,37 @@ function onAddBookClick() {
 
     console.log("onAddBookClick: newBook", newBook);
 
+    // Check validation
+    if (typeof newBook.title == 'undefined' || newBook.title == null || newBook.title.trim().length < 3) {
+        validationMessage.innerHTML = VALIDATION_MESSAGES.invalidTitle;
+        return
+    } else if (typeof newBook.author == 'undefined' || newBook.author == null || newBook.author.trim().length < 3) {
+        validationMessage.innerHTML = VALIDATION_MESSAGES.invalidAuthor;
+        return
+    }
+
     let row = document.createElement('div');
     row.innerHTML = bookRowTeplate(newBook);
 
-    BOOKS_LIST_CONTAINER.insertBefore(row, BOOKS_LIST_CONTAINER.children[0]);
+    booksListContainer.insertBefore(row, booksListContainer.children[0]);
 
     addBookTitle.value = '';
     addBookAuthor.value = '';
     addBookDateFinished.value = '';
+    validationMessage.innerHTML = '';
     //TODO add to model
 }
 
 function load() {
-    BOOKS_LIST_CONTAINER =  document.getElementById("booksList");
+    booksListContainer =  document.getElementById("booksList");
+    finishedBooksListContainer = document.getElementById("finishedBooksList");
     addBookTitle = document.getElementById("addBookTitle");
     addBookAuthor = document.getElementById("addBookAuthor");
     addBookDateFinished = document.getElementById("addBookDateFinished");
     addBookBtn = document.getElementById("addBook");
+    validationMessage = document.getElementById("validationMessage");
 
-    BOOKS_LIST_CONTAINER.addEventListener("click", onBookRowClick);
+    booksListContainer.addEventListener("click", onBookRowClick);
     document.getElementById("addBook").addEventListener("click", onAddBookClick);
 
     document.addEventListener('DOMContentLoaded', function() {
@@ -95,7 +115,12 @@ function load() {
 
                 let row = document.createElement('div');
                 row.innerHTML = bookRowTeplate(book);
-                BOOKS_LIST_CONTAINER.appendChild(row);
+                if (book.finished) {
+                    finishedBooksListContainer.appendChild(row);
+                } else {
+                    booksListContainer.appendChild(row);
+                }
+
             })
         });
 }

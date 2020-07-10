@@ -1,3 +1,12 @@
 .datepicker-modal {
     color: black !important;
 }
+
+.validation-message {
+    position: absolute;
+}
+
+.border-top {
+    border-top: 1px solid #80808040;
+    padding-top: 20px;
+}
